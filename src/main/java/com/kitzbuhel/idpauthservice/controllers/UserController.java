@@ -106,6 +106,7 @@ public class UserController {
             System.out.println("User is not logged in");
 
             response.put("response", "User is not logged in");
+            response.put("value", "false");
             return new ResponseEntity<>(objectMapper.writeValueAsString(response), HttpStatus.OK);
         }
 
@@ -122,6 +123,7 @@ public class UserController {
 
         System.out.println("User is logged in");
         response.put("response", "User is logged in");
+        response.put("value", "true");
 
         return new ResponseEntity<>(objectMapper.writeValueAsString(response), HttpStatus.OK);
     }
