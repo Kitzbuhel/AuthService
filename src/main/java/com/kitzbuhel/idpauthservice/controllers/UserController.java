@@ -99,6 +99,7 @@ public class UserController {
             System.out.println("User is not registered");
 
             response.put("response", "User is not registered");
+            response.put("value", "false");
             return new ResponseEntity<>(objectMapper.writeValueAsString(response), HttpStatus.BAD_REQUEST);
         }
 
@@ -118,6 +119,7 @@ public class UserController {
             userRepository.save(existingUser);
 
             response.put("response", "User session has expired");
+            response.put("value", "false");
             return new ResponseEntity<>(objectMapper.writeValueAsString(response), HttpStatus.BAD_REQUEST);
         }
 
