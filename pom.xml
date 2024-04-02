@@ -14,7 +14,9 @@
 	<name>idp-auth-service</name>
 	<description>Basic authentication service for IDP Project</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>21</java.version>
+
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
