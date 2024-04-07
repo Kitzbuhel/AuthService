@@ -61,9 +61,17 @@ public class UserController {
 
     @PatchMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody User user) throws JsonProcessingException {
-        User existingUser = userRepository.findById(user.getEmail()).orElse(null);
         Map<String, String> response = new HashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
+
+        if (!EmailValidator.getInstance().isValid(user.getEmail())) {
+            System.out.println("Invalid email");
+
+            response.put("response", "Invalid email");
+            return new ResponseEntity<>(objectMapper.writeValueAsString(response), HttpStatus.BAD_REQUEST);
+        }
+
+        User existingUser = userRepository.findById(user.getEmail()).orElse(null);
 
         if (existingUser == null) {
             System.out.println("Username or password is incorrect");
@@ -91,9 +99,18 @@ public class UserController {
 
     @GetMapping("/status/{email}")
     public ResponseEntity<String> getUserStatus(@PathVariable String email) throws JsonProcessingException {
-        User existingUser = userRepository.findById(email).orElse(null);
         Map<String, String> response = new HashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
+
+        if (!EmailValidator.getInstance().isValid(email)) {
+            System.out.println("Invalid email");
+
+            response.put("response", "Invalid email");
+            response.put("value", "false");
+            return new ResponseEntity<>(objectMapper.writeValueAsString(response), HttpStatus.BAD_REQUEST);
+        }
+
+        User existingUser = userRepository.findById(email).orElse(null);
 
         if (existingUser == null) {
             System.out.println("User is not registered");
